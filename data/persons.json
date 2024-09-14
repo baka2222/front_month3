@@ -1,0 +1,27 @@
+[
+  {
+    "name": "John Doe",
+    "age": 25,
+    "person_photo": "https://photoplay.ru/sites/default/files/styles/r-1-1-mobile/public/gallery_images/bez_nazvaniya_2.jpg?itok=neZUWJ7E"
+  },
+  {
+    "name": "Jane Smith",
+    "age": 30,
+    "person_photo": "https://the-steppe.com/wp-content/uploads/2019/09/40166ff5f241350847243ec9f2d75954.jpeg"
+  },
+  {
+    "name": "Alice Johnson",
+    "age": 22,
+    "person_photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf96fmCwPWgOhOuCdCFpyQQaIAVSgyJ9rlww&s"
+  },
+  {
+    "name": "Bob Brown",
+    "age": 27,
+    "person_photo": "https://wl-adme.cf.tsp.li/resize/728x/jpg/cf3/3eb/cebf385e9da99914a27f31c22d.jpg"
+  },
+  {
+    "name": "Carol White",
+    "age": 24,
+    "person_photo": "https://bigpicture.ru/wp-content/uploads/2019/04/grandbeauty07.jpg"
+  }
+]

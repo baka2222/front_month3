@@ -99,10 +99,23 @@
     border: 1px solid var(--orange);
     text-align: center;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-around;
     align-items: center;
     padding: 10px;
+}
+
+.card img {
+    height: 130px;
+    width: auto;
+}
+
+.text_block {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .card p {

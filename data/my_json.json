@@ -1,0 +1,10 @@
+{
+  "me": {
+    "name": "Bakai",
+    "age": 16,
+    "hobby": ["Backed-developing", "Chinese language", "Frontend-developing", "Chess", "English"],
+    "have_job": false,
+    "city": "Bishkek",
+    "nationality": "kyrgyz"
+  }
+}
