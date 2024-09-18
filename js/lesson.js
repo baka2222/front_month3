@@ -149,3 +149,48 @@ const returnMyJson = () => {
 persons()
 returnMyJson()
 
+
+// CONVERTER
+const usdInput = document.querySelector('#usd');
+const somInput = document.querySelector('#som');
+const eurInput = document.querySelector('#eur');
+
+
+const converter = (elem, target1, target2, currency) => {
+    elem.oninput = () => {
+        const request = new XMLHttpRequest();
+        request.open('GET', '../data/converter.json');
+        request.setRequestHeader('Content-type', 'application/json');
+        request.send();
+
+        request.onload = () => {
+            let data = JSON.parse(request.response);
+
+            if (currency === 'usd') {
+                target1.value = (elem.value * data.usd).toFixed(2);
+                target2.value = (elem.value * data.euro / data.usd).toFixed(2);
+            }
+
+            if (currency === 'som') {
+                target1.value = (elem.value / data.usd).toFixed(2);
+                target2.value = (elem.value / data.euro).toFixed(2);
+            }
+
+            if (currency === 'euro') {
+                target1.value = (elem.value * data.euro).toFixed(2);
+                target2.value = (elem.value * data.usd / data.euro).toFixed(2);
+            }
+
+            if (elem.value === '') {
+                target1.value = '';
+                target2.value = '';
+            }
+        }
+    }
+}
+
+
+converter(usdInput, somInput, eurInput, 'usd');
+converter(somInput, usdInput, eurInput, 'som');
+converter(eurInput, somInput, usdInput, 'euro');
+
