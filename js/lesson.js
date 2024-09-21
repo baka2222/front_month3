@@ -55,99 +55,99 @@ showBlock(0);
 
 
 //4 домашка
-const cardBlock = document.querySelector(".card_switcher .card");
-const next = document.querySelector(".card_switcher #btn-next");
-const prev = document.querySelector(".card_switcher #btn-prev");
-
-
-let persons = () => {
-    let personsRequest = new XMLHttpRequest;
-    let personIndex = 0;
-
-    personsRequest.open('GET', '../data/persons.json');
-    personsRequest.setRequestHeader('Content-type', 'application/json');
-    personsRequest.send();
-    personsRequest.onload = () => {
-        let data = JSON.parse(personsRequest.response);
-        data.forEach(() => {
-            cardBlock.innerHTML = `
-            <img src="${data[personIndex].person_photo}" alt="">
-                    <div class="text_block">
-                        <p class="name">${data[personIndex].name}</p>
-                        <div class="age">age: ${data[personIndex].age}</div>
-                    </div>
-        `
-        })
-
-        next.addEventListener('click', () => {
-            if (personIndex === data.length - 1) {
-                personIndex = 0;
-                data.forEach(() => {
-                    cardBlock.innerHTML = `
-            <img src="${data[personIndex].person_photo}" alt="">
-                    <div class="text_block">
-                        <p class="name">${data[personIndex].name}</p>
-                        <div class="age">age: ${data[personIndex].age}</div>
-                    </div>
-        `
-                })
-            } else {
-                personIndex++;
-                data.forEach(() => {
-                    cardBlock.innerHTML = `
-            <img src="${data[personIndex].person_photo}" alt="">
-                    <div class="text_block">
-                        <p class="name">${data[personIndex].name}</p>
-                        <div class="age">age: ${data[personIndex].age}</div>
-                    </div>
-        `
-                })
-            }
-        })
-
-        prev.addEventListener('click', () => {
-            if (personIndex === 0) {
-                personIndex = data.length - 1;
-                data.forEach(() => {
-                    cardBlock.innerHTML = `
-            <img src="${data[personIndex].person_photo}" alt="">
-                    <div class="text_block">
-                        <p class="name">${data[personIndex].name}</p>
-                        <div class="age">age: ${data[personIndex].age}</div>
-                    </div>
-        `
-                })
-            } else {
-                personIndex--;
-                data.forEach(() => {
-                    cardBlock.innerHTML = `
-            <img src="${data[personIndex].person_photo}" alt="">
-                    <div class="text_block">
-                        <p class="name">${data[personIndex].name}</p>
-                        <div class="age">age: ${data[personIndex].age}</div>
-                    </div>
-        `
-                })
-            }
-        })
-    }
-}
-
-
-const returnMyJson = () => {
-    let myJsonRequest = new XMLHttpRequest();
-    myJsonRequest.open('GET', '../data/my_json.json');
-    myJsonRequest.setRequestHeader('Content-type', 'application/json');
-    myJsonRequest.send();
-    myJsonRequest.onload = () => {
-        let data = JSON.parse(myJsonRequest.response);
-        console.log(data)
-    }
-}
-
-
-persons()
-returnMyJson()
+// const cardBlock = document.querySelector(".card_switcher .card");
+// const next = document.querySelector(".card_switcher #btn-next");
+// const prev = document.querySelector(".card_switcher #btn-prev");
+//
+//
+// let persons = () => {
+//     let personsRequest = new XMLHttpRequest;
+//     let personIndex = 0;
+//
+//     personsRequest.open('GET', '../data/persons.json');
+//     personsRequest.setRequestHeader('Content-type', 'application/json');
+//     personsRequest.send();
+//     personsRequest.onload = () => {
+//         let data = JSON.parse(personsRequest.response);
+//         data.forEach(() => {
+//             cardBlock.innerHTML = `
+//             <img src="${data[personIndex].person_photo}" alt="">
+//                     <div class="text_block">
+//                         <p class="name">${data[personIndex].name}</p>
+//                         <div class="age">age: ${data[personIndex].age}</div>
+//                     </div>
+//         `
+//         })
+//
+//         next.addEventListener('click', () => {
+//             if (personIndex === data.length - 1) {
+//                 personIndex = 0;
+//                 data.forEach(() => {
+//                     cardBlock.innerHTML = `
+//             <img src="${data[personIndex].person_photo}" alt="">
+//                     <div class="text_block">
+//                         <p class="name">${data[personIndex].name}</p>
+//                         <div class="age">age: ${data[personIndex].age}</div>
+//                     </div>
+//         `
+//                 })
+//             } else {
+//                 personIndex++;
+//                 data.forEach(() => {
+//                     cardBlock.innerHTML = `
+//             <img src="${data[personIndex].person_photo}" alt="">
+//                     <div class="text_block">
+//                         <p class="name">${data[personIndex].name}</p>
+//                         <div class="age">age: ${data[personIndex].age}</div>
+//                     </div>
+//         `
+//                 })
+//             }
+//         })
+//
+//         prev.addEventListener('click', () => {
+//             if (personIndex === 0) {
+//                 personIndex = data.length - 1;
+//                 data.forEach(() => {
+//                     cardBlock.innerHTML = `
+//             <img src="${data[personIndex].person_photo}" alt="">
+//                     <div class="text_block">
+//                         <p class="name">${data[personIndex].name}</p>
+//                         <div class="age">age: ${data[personIndex].age}</div>
+//                     </div>
+//         `
+//                 })
+//             } else {
+//                 personIndex--;
+//                 data.forEach(() => {
+//                     cardBlock.innerHTML = `
+//             <img src="${data[personIndex].person_photo}" alt="">
+//                     <div class="text_block">
+//                         <p class="name">${data[personIndex].name}</p>
+//                         <div class="age">age: ${data[personIndex].age}</div>
+//                     </div>
+//         `
+//                 })
+//             }
+//         })
+//     }
+// }
+//
+//
+// const returnMyJson = () => {
+//     let myJsonRequest = new XMLHttpRequest();
+//     myJsonRequest.open('GET', '../data/my_json.json');
+//     myJsonRequest.setRequestHeader('Content-type', 'application/json');
+//     myJsonRequest.send();
+//     myJsonRequest.onload = () => {
+//         let data = JSON.parse(myJsonRequest.response);
+//         console.log(data)
+//     }
+// }
+//
+//
+// persons()
+// returnMyJson()
 
 
 // CONVERTER
@@ -193,4 +193,56 @@ const converter = (elem, target1, target2, currency) => {
 converter(usdInput, somInput, eurInput, 'usd');
 converter(somInput, usdInput, eurInput, 'som');
 converter(eurInput, somInput, usdInput, 'euro');
+
+
+// CARD SWITCHER  (Я переиспользовал верстку и закомментил 4-ую домашку)
+const cardBlock = document.querySelector('.card');
+const prev = document.querySelector('#btn-prev');
+const next = document.querySelector('#btn-next');
+const URL = 'https://jsonplaceholder.typicode.com/todos/';
+let id = 0;
+
+const fillBlock = (data) => {
+    cardBlock.innerHTML = `
+        <div>
+            <p>${data.title}</p>
+            <p style="color: ${data.completed ? 'green' : 'red'}">
+                ${data.completed ? 'Completed' : 'Not Completed'}
+            </p>
+            <span>ID: ${data.id}</span>
+        </div>
+    `;
+};
+
+const setNext = () => {
+    id = id < 200 ? id + 1 : 1;
+    fetch(`${URL}${id}`)
+        .then(res => res.json())
+        .then(data => {
+            fillBlock(data);
+        })
+        .catch(e => console.log('Something went wrong...\n', e));
+};
+
+const setPrev = () => {
+    id = id > 1 ? id - 1 : 200;
+    fetch(`${URL}${id}`)
+        .then(res => res.json())
+        .then(data => {
+            fillBlock(data);
+        })
+        .catch(e => console.log('Something went wrong...\n', e));
+};
+
+
+setNext();
+next.onclick = setNext;
+prev.onclick = setPrev;
+
+
+//Последнее задание 6-ой дз
+fetch('https://jsonplaceholder.typicode.com/posts')
+    .then(res => res.json())
+    .then(data => {console.log(data)})
+
 

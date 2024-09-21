@@ -93,13 +93,13 @@
     padding: 100px 0;
 }
 
-.card {
+.card > div {
     width: 500px;
     height: 150px;
     border: 1px solid var(--orange);
     text-align: center;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-around;
     align-items: center;
     padding: 10px;
