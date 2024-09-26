@@ -157,34 +157,32 @@ const eurInput = document.querySelector('#eur');
 
 
 const converter = (elem, target1, target2, currency) => {
-    elem.oninput = () => {
-        const request = new XMLHttpRequest();
-        request.open('GET', '../data/converter.json');
-        request.setRequestHeader('Content-type', 'application/json');
-        request.send();
+    elem.oninput = async () => {
+        try {
+            const request = await fetch('../data/converter.json');
+            const data = await request.json();
+        } catch (e) {
+            console.log(e)
+        }
 
-        request.onload = () => {
-            let data = JSON.parse(request.response);
+        if (currency === 'usd') {
+            target1.value = (elem.value * data.usd).toFixed(2);
+            target2.value = (elem.value * data.euro / data.usd).toFixed(2);
+        }
 
-            if (currency === 'usd') {
-                target1.value = (elem.value * data.usd).toFixed(2);
-                target2.value = (elem.value * data.euro / data.usd).toFixed(2);
-            }
+        if (currency === 'som') {
+            target1.value = (elem.value / data.usd).toFixed(2);
+            target2.value = (elem.value / data.euro).toFixed(2);
+        }
 
-            if (currency === 'som') {
-                target1.value = (elem.value / data.usd).toFixed(2);
-                target2.value = (elem.value / data.euro).toFixed(2);
-            }
+        if (currency === 'euro') {
+            target1.value = (elem.value * data.euro).toFixed(2);
+            target2.value = (elem.value * data.usd / data.euro).toFixed(2);
+        }
 
-            if (currency === 'euro') {
-                target1.value = (elem.value * data.euro).toFixed(2);
-                target2.value = (elem.value * data.usd / data.euro).toFixed(2);
-            }
-
-            if (elem.value === '') {
-                target1.value = '';
-                target2.value = '';
-            }
+        if (elem.value === '') {
+            target1.value = '';
+            target2.value = '';
         }
     }
 }
@@ -214,24 +212,28 @@ const fillBlock = (data) => {
     `;
 };
 
-const setNext = () => {
+const setNext = async () => {
     id = id < 200 ? id + 1 : 1;
-    fetch(`${URL}${id}`)
-        .then(res => res.json())
-        .then(data => {
-            fillBlock(data);
-        })
-        .catch(e => console.log('Something went wrong...\n', e));
+
+    try {
+        const request = await fetch(`${URL}${id}`);
+        const data = await request.json();
+        fillBlock(data);
+    } catch (e) {
+        console.log(e)
+    }
 };
 
-const setPrev = () => {
+const setPrev = async () => {
     id = id > 1 ? id - 1 : 200;
-    fetch(`${URL}${id}`)
-        .then(res => res.json())
-        .then(data => {
-            fillBlock(data);
-        })
-        .catch(e => console.log('Something went wrong...\n', e));
+
+    try {
+        const request = await fetch(`${URL}${id}`);
+        const data = await request.json();
+        fillBlock(data);
+    } catch (e) {
+        console.log(e)
+    }
 };
 
 
@@ -241,8 +243,13 @@ prev.onclick = setPrev;
 
 
 //Последнее задание 6-ой дз
-fetch('https://jsonplaceholder.typicode.com/posts')
-    .then(res => res.json())
-    .then(data => {console.log(data)})
+const logData = async () => {
+    const request = await fetch('https://jsonplaceholder.typicode.com/posts');
+    const data = await request.json();
+    console.log(data)
+}
+
+
+logData()
 
 
