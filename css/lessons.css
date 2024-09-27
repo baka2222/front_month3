@@ -23,7 +23,7 @@
 }
 
 .form_phone button {
-    width: 100%;
+    width: 300px;
     margin: 20px 0;
 }
 
@@ -88,18 +88,42 @@
 
 /*------CARD SWITCHER------*/
 
+#loading-indicator {
+    margin-top: 10px;
+    font-weight: bold;
+    color: white;
+    font-size: 2rem;
+}
+
 .card_switcher {
     background-color: black;
     padding: 100px 0;
 }
 
-.card > div {
+#btn-next > img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: invert(66%) sepia(93%) saturate(500%) hue-rotate(-15deg) brightness(103%) contrast(102%);
+    padding: 5px 0;
+}
+
+#btn-prev > img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: invert(66%) sepia(93%) saturate(500%) hue-rotate(-15deg) brightness(103%) contrast(102%);
+    transform: scale(-1);
+    padding: 5px 0;
+}
+
+.card {
     width: 500px;
     height: 150px;
     border: 1px solid var(--orange);
     text-align: center;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-around;
     align-items: center;
     padding: 10px;
@@ -134,7 +158,6 @@
     align-items: center;
     justify-content: space-between;
 }
-
 
 /*-------CONVERTER--------*/
 
@@ -183,4 +206,18 @@
 
 hr {
     width: 100%;
+}
+
+button {
+    padding: 10px;
+    background-color: black;
+    font-size: 2rem;
+    border-radius: 10px;
+    color: var(--orange);
+    border: 1px solid var(--orange);
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: lightgray;
 }

@@ -1,3 +1,36 @@
+// Phone checker
+const phoneButton = document.getElementById('phone_button');
+const phoneInput = document.getElementById('phone_input');
+const phoneResult = document.getElementById('phone_result');
+
+
+const checkPhoneNumber = () => {
+    const phoneRegex = /^(?:\+?\d{1,3}\s?)?(?:\(?\d{2,3}\)?[\s-]?(\d{3})[\s-]?(\d{4}))$/;
+    const phoneValue = phoneInput.value.trim();
+
+
+    if (!phoneRegex.test(phoneValue)) {
+        phoneResult.textContent = 'Неправильный формат номера';
+        phoneResult.style.color = 'red';
+        return;
+    }
+
+
+    phoneResult.textContent = 'Проверка номера...';
+    phoneResult.style.color = 'blue';
+
+    setTimeout(() => {
+        phoneResult.textContent = `Номер ${phoneValue} корректен!`;
+        phoneResult.style.color = 'green';
+    }, 2000);
+};
+
+
+phoneButton.addEventListener('click', checkPhoneNumber);
+
+
+
+// Tab slider
 const tabContentBlocks = document.querySelectorAll(".tab_content_block");
 const tabContentItems = document.querySelectorAll(".tab_content_item");
 
@@ -54,102 +87,6 @@ hideBlocks();
 showBlock(0);
 
 
-//4 домашка
-// const cardBlock = document.querySelector(".card_switcher .card");
-// const next = document.querySelector(".card_switcher #btn-next");
-// const prev = document.querySelector(".card_switcher #btn-prev");
-//
-//
-// let persons = () => {
-//     let personsRequest = new XMLHttpRequest;
-//     let personIndex = 0;
-//
-//     personsRequest.open('GET', '../data/persons.json');
-//     personsRequest.setRequestHeader('Content-type', 'application/json');
-//     personsRequest.send();
-//     personsRequest.onload = () => {
-//         let data = JSON.parse(personsRequest.response);
-//         data.forEach(() => {
-//             cardBlock.innerHTML = `
-//             <img src="${data[personIndex].person_photo}" alt="">
-//                     <div class="text_block">
-//                         <p class="name">${data[personIndex].name}</p>
-//                         <div class="age">age: ${data[personIndex].age}</div>
-//                     </div>
-//         `
-//         })
-//
-//         next.addEventListener('click', () => {
-//             if (personIndex === data.length - 1) {
-//                 personIndex = 0;
-//                 data.forEach(() => {
-//                     cardBlock.innerHTML = `
-//             <img src="${data[personIndex].person_photo}" alt="">
-//                     <div class="text_block">
-//                         <p class="name">${data[personIndex].name}</p>
-//                         <div class="age">age: ${data[personIndex].age}</div>
-//                     </div>
-//         `
-//                 })
-//             } else {
-//                 personIndex++;
-//                 data.forEach(() => {
-//                     cardBlock.innerHTML = `
-//             <img src="${data[personIndex].person_photo}" alt="">
-//                     <div class="text_block">
-//                         <p class="name">${data[personIndex].name}</p>
-//                         <div class="age">age: ${data[personIndex].age}</div>
-//                     </div>
-//         `
-//                 })
-//             }
-//         })
-//
-//         prev.addEventListener('click', () => {
-//             if (personIndex === 0) {
-//                 personIndex = data.length - 1;
-//                 data.forEach(() => {
-//                     cardBlock.innerHTML = `
-//             <img src="${data[personIndex].person_photo}" alt="">
-//                     <div class="text_block">
-//                         <p class="name">${data[personIndex].name}</p>
-//                         <div class="age">age: ${data[personIndex].age}</div>
-//                     </div>
-//         `
-//                 })
-//             } else {
-//                 personIndex--;
-//                 data.forEach(() => {
-//                     cardBlock.innerHTML = `
-//             <img src="${data[personIndex].person_photo}" alt="">
-//                     <div class="text_block">
-//                         <p class="name">${data[personIndex].name}</p>
-//                         <div class="age">age: ${data[personIndex].age}</div>
-//                     </div>
-//         `
-//                 })
-//             }
-//         })
-//     }
-// }
-//
-//
-// const returnMyJson = () => {
-//     let myJsonRequest = new XMLHttpRequest();
-//     myJsonRequest.open('GET', '../data/my_json.json');
-//     myJsonRequest.setRequestHeader('Content-type', 'application/json');
-//     myJsonRequest.send();
-//     myJsonRequest.onload = () => {
-//         let data = JSON.parse(myJsonRequest.response);
-//         console.log(data)
-//     }
-// }
-//
-//
-// persons()
-// returnMyJson()
-
-
 // CONVERTER
 const usdInput = document.querySelector('#usd');
 const somInput = document.querySelector('#som');
@@ -158,9 +95,12 @@ const eurInput = document.querySelector('#eur');
 
 const converter = (elem, target1, target2, currency) => {
     elem.oninput = async () => {
+        let data;
+
         try {
             const request = await fetch('../data/converter.json');
-            const data = await request.json();
+            const datas = await request.json();
+            data = datas
         } catch (e) {
             console.log(e)
         }
@@ -193,12 +133,13 @@ converter(somInput, usdInput, eurInput, 'som');
 converter(eurInput, somInput, usdInput, 'euro');
 
 
-// CARD SWITCHER  (Я переиспользовал верстку и закомментил 4-ую домашку)
+// CARD SWITCHER
 const cardBlock = document.querySelector('.card');
 const prev = document.querySelector('#btn-prev');
 const next = document.querySelector('#btn-next');
 const URL = 'https://jsonplaceholder.typicode.com/todos/';
-let id = 0;
+let id = 1;
+const totalTodos = 200;
 
 const fillBlock = (data) => {
     cardBlock.innerHTML = `
@@ -212,34 +153,43 @@ const fillBlock = (data) => {
     `;
 };
 
-const setNext = async () => {
-    id = id < 200 ? id + 1 : 1;
-
+const fetchTodo = async (id) => {
+    cardBlock.innerHTML = `
+    <div>
+            <div id="loading-indicator">Loading...</div>
+        </div>
+    `;
     try {
         const request = await fetch(`${URL}${id}`);
+        if (!request.ok) throw new Error('Failed to fetch data');
         const data = await request.json();
         fillBlock(data);
+        updateButtonState();
     } catch (e) {
-        console.log(e)
+        cardBlock.innerHTML = `<p style="color: red;">Error: ${e.message}</p>`;
     }
 };
 
-const setPrev = async () => {
-    id = id > 1 ? id - 1 : 200;
+const setNext = () => {
+    id = id < totalTodos ? id + 1 : 1;
+    fetchTodo(id);
+};
 
-    try {
-        const request = await fetch(`${URL}${id}`);
-        const data = await request.json();
-        fillBlock(data);
-    } catch (e) {
-        console.log(e)
-    }
+const setPrev = () => {
+    id = id > 1 ? id - 1 : totalTodos;
+    fetchTodo(id);
+};
+
+const updateButtonState = () => {
+    prev.disabled = false;
+    next.disabled = false;
 };
 
 
-setNext();
+fetchTodo(id);
 next.onclick = setNext;
 prev.onclick = setPrev;
+
 
 
 //Последнее задание 6-ой дз
@@ -251,5 +201,39 @@ const logData = async () => {
 
 
 logData()
+
+
+// Weather
+const apiKey = 'e417df62e04d3b1b111abeab19cea714'; // Замените на ваш API-ключ
+const getWeatherBtn = document.getElementById('getWeatherBtn');
+const cityInput = document.querySelector('.cityName');
+const cityDisplay = document.querySelector('.city');
+const tempDisplay = document.querySelector('.temp');
+
+const getWeather = async () => {
+    const cityName = cityInput.value;
+    if (!cityName) {
+        cityDisplay.textContent = 'Пожалуйста, введите название города.';
+        tempDisplay.textContent = '';
+        return;
+    }
+
+    const URL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
+
+    try {
+        const response = await fetch(URL);
+        if (!response.ok) throw new Error('Город не найден');
+
+        const data = await response.json();
+        cityDisplay.textContent = data.name;
+        tempDisplay.textContent = `Температура: ${data.main.temp} °C`;
+    } catch (error) {
+        cityDisplay.textContent = error.message;
+        tempDisplay.textContent = '';
+    }
+};
+
+getWeatherBtn.onclick = getWeather;
+
 
 

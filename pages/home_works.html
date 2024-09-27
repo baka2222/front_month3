@@ -20,12 +20,21 @@
                 </a>
                 <ul class="menu">
                     <li class="menu_link">
+                        <div class="border-container">
+                            <img class="header_icon" src="../icons/homeworks.png" alt="homework">
+                        </div>
                         <a href="../pages/home_works.html">Home Works</a>
                     </li>
                     <li class="menu_link">
+                        <div class="border-container">
+                            <img class="header_icon" src="../icons/lessons.png" alt="lessons">
+                        </div>
                         <a href="../pages/lessons.html">Lessons</a>
                     </li>
                     <li class="menu_link">
+                        <div class="border-container">
+                            <img class="header_icon" src="../icons/send_message.png" alt="telegram">
+                        </div>
                         <a href="https://t.me/NurDinBuy16" target="_blank">Send message</a>
                     </li>
                 </ul>
@@ -34,19 +43,21 @@
         </div>
     </div>
 
+
     <div class="gmail_block">
         <div class="container">
             <h3>Home work 1 (part 1)</h3>
             <div class="inner_gmail_block">
                 <div class="form_gmail">
-                    <label for="gmail_input"></label>
+                    <label for="gmail_input">Enter your Gmail:</label>
                     <input type="text" id="gmail_input" placeholder="your gmail">
                     <button class="btn" id="gmail_button">Check gmail</button>
-                    <span class="checker" id="gmail_result"></span>
+                    <span class="checker" id="gmail_result" aria-live="polite"></span>
                 </div>
             </div>
         </div>
     </div>
+
 
     <div class="move_block">
         <div class="container">
@@ -58,6 +69,7 @@
             </div>
         </div>
     </div>
+
 
     <div class="stopwatch">
         <div class="container">
@@ -71,6 +83,17 @@
                 <button class="btn" id="start">Start</button>
                 <button class="btn" id="stop">Stop</button>
                 <button class="btn" id="reset">Reset</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card_switcher">
+        <div class="container">
+            <h3>Persons</h3>
+            <div class="inner_card_switcher">
+                <button class="btn" id="btn-prev"><img src="../icons/free-icon-arrow-right-1549612.png" alt="right"></button>
+                <div class="card"></div>
+                <button class="btn" id="btn-next"><img src="../icons/free-icon-arrow-right-1549612.png" alt="right"></button>
             </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -20,12 +20,21 @@
                 </a>
                 <ul class="menu">
                     <li class="menu_link">
+                        <div class="border-container">
+                            <img class="header_icon" src="../icons/homeworks.png" alt="homework">
+                        </div>
                         <a href="../pages/home_works.html">Home Works</a>
                     </li>
                     <li class="menu_link">
+                        <div class="border-container">
+                            <img class="header_icon" src="../icons/lessons.png" alt="lessons">
+                        </div>
                         <a href="../pages/lessons.html">Lessons</a>
                     </li>
                     <li class="menu_link">
+                        <div class="border-container">
+                            <img class="header_icon" src="../icons/send_message.png" alt="telegram">
+                        </div>
                         <a href="https://t.me/NurDinBuy16" target="_blank">Send message</a>
                     </li>
                 </ul>
@@ -124,10 +133,11 @@
         <div class="container">
             <h3>Card Switcher</h3>
             <div class="inner_card_switcher">
-                <button class="btn" id="btn-prev">prev</button>
+                <button class="btn" id="btn-prev"><img src="../icons/free-icon-arrow-right-1549612.png" alt="right"></button>
                 <div class="card"></div>
-                <button class="btn" id="btn-next">next</button>
+                <button class="btn" id="btn-next"><img src="../icons/free-icon-arrow-right-1549612.png" alt="right"></button>
             </div>
+            <div id="loading-indicator" style="display: none;">Loading...</div> <!-- Loading Indicator -->
         </div>
     </div>
 
@@ -137,15 +147,17 @@
             <div class="inner_weather">
                 <div>
                     <input type="text" class="cityName" placeholder="Найти погоду в...">
+                    <button id="getWeatherBtn">Показать погоду</button>
                 </div>
                 <div>
                     <span class="city"></span>
-                    <hr/>
+                    <hr />
                     <span class="temp"></span>
                 </div>
             </div>
         </div>
     </div>
+
 
     <div class="footer">
         <div class="container">

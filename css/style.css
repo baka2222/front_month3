@@ -1,5 +1,16 @@
 /* HEADER */
 
+.border-container {
+    filter: invert(66%) sepia(93%) saturate(500%) hue-rotate(-15deg) brightness(103%) contrast(102%);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-right: 8px;
+}
+
 .header {
     height: 80px;
     background: #2c2d2f;
@@ -40,6 +51,16 @@
     display: flex;
     justify-content: space-around;
     width: 600px;
+}
+
+.header_icon {
+    max-width: 28px;
+    vertical-align: middle;
+}
+
+.menu_link {
+    display: flex;
+    align-items: center;
 }
 
 .menu_link a {
